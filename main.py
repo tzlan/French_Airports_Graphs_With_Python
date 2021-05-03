@@ -3,20 +3,15 @@
 # Press Maj+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import pandas
+import numpy as np
 import networkx
 import matplotlib.pyplot as plt
 from sklearn import preprocessing
 import community as community_louvain
 
-data = pandas.read_csv('/content/drive/MyDrive/Colab Notebooks/heart_failure_clinical_records_dataset.xls')
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+data = pandas.read_excel("d9c5dbbe269cee68a13ccbe7e7eda7f3728b39d5f62cd6e9a7ad5272fd5678.xlsx", "data_Trajets")
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print(data)
+data.head()
