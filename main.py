@@ -16,4 +16,7 @@ pd.set_option('display.width', None)
 pd.set_option('display.max_colwidth', None)
 
 data = pd.read_csv("d9c5dbbe269cee68a13ccbe7e7eda7f3728b39d5f62cd6e9a7ad5272fd5678.csv", sep=";")
-print(data)
+#print(data)
+
+#print(data.info)
+data.head()
