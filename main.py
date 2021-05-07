@@ -46,26 +46,30 @@ for v in aeroport :
 
 
 #Generation du graph
+def generation_graphe(data, data1, aeroport):
+    G = networkx.nx.MultiGraph()
+    for v in aeroport:
+        G.add_node(v)
+    i = 0
+    for v in aeroport:
+        i = i + 1
+        j = 0
+        for u in aeroport:
+            VarAvion = data[v][j]
+            VarVoiture = data1[v][j]
+            G.add_weighted_edges_from([(v, u, VarAvion), (v, u, VarVoiture)])
+            j = j + 1
+    return G
 
-def generation_graphe(data,aeroport):
-  G = networkx.nx.MultiGraph()
-  for v in aeroport:
-    G.add_node(v)
-  for v in aeroport:
-    for u in aeroport:
-      G.add_edge(v,u)
-  return G
-#for x in DatDistanceAvion:
-#print(x)
-#print(data["sex"][0])
-G = generation_graphe(DatDistanceAvion, aeroport)
+
+G = generation_graphe(DatAvion, DatVehicule, aeroport)
 options = {
-      'node_color' : 'black',
-      'node_size'  : 10,
-      'edge_color' : 'tab:gray',
-      'with_labels': False
-    }
-plt.figure(figsize=(10,10))
-pos = networkx.spring_layout(G,k=0.1)
-networkx.draw(G,pos,**options)
+    'node_color': 'red',
+    'node_size': 10,
+    'edge_color': 'tab:gray',
+    'with_labels': False
+}
+plt.figure(figsize=(10, 10))
+pos = networkx.spring_layout(G, k=0.1)
+networkx.draw(G, pos, **options)
 plt.show()
