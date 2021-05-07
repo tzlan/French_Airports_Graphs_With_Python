@@ -2,9 +2,9 @@
 
 # Press Maj+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import networkx
 import pandas as pd
 import numpy as np
-import networkx as nx
 import matplotlib.pyplot as plt
 from sklearn import preprocessing
 import community as community_louvain
@@ -25,12 +25,47 @@ DatDistanceVehicule = pd.read_csv("DistanceVehicule.csv", sep=";")
 
 #Affichage des données
 
-print(DatAvion)
-print(DatDistanceAvion)
-print(DatVehicule)
-print(DatDistanceVehicule)
+#print(DatAvion)
+#print(DatDistanceAvion)
+#print(DatVehicule)
+#print(DatDistanceVehicule)
 
 
 
 #Normalisation
 
+aeroport = ["BEAUVAIS-TILLE", "BIARRITZ-BAYONNE-ANGLET", "BORDEAUX-MERIGNAC", "LILLE-LESQUIN", "LYON-SAINT-EXUPERY", "MARSEILLE-PROVENCE","NANTES-ATLANTIQUE","NICE-COTE-D'AZUR","PARIS-ORLY","ROUEN-VALLEE-DE-SEINE","STRASBOURG-ENTZHEIM","TOULOUSE-BLAGNAC","TOURS-VAL-DE-LOIRE"]
+for v in aeroport :
+  DatDistanceAvion[v] = DatDistanceAvion[v]/100
+for v in aeroport :
+  DatDistanceVehicule[v] = DatDistanceVehicule[v]/100
+for v in aeroport :
+  DatAvion[v] = DatAvion[v]/100
+for v in aeroport :
+  DatVehicule[v] = DatVehicule[v]/100
+
+
+#Generation du graph
+
+def generation_graphe(data,aeroport):
+  G = networkx.nx.MultiGraph()
+  for v in aeroport:
+    G.add_node(v)
+  for v in aeroport:
+    for u in aeroport:
+      G.add_edge(v,u)
+  return G
+#for x in DatDistanceAvion:
+#print(x)
+#print(data["sex"][0])
+G = generation_graphe(DatDistanceAvion, aeroport)
+options = {
+      'node_color' : 'black',
+      'node_size'  : 10,
+      'edge_color' : 'tab:gray',
+      'with_labels': False
+    }
+plt.figure(figsize=(10,10))
+pos = networkx.spring_layout(G,k=0.1)
+networkx.draw(G,pos,**options)
+plt.show()
