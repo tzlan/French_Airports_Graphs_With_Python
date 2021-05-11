@@ -65,9 +65,10 @@ def generation_graphe(data, data1, aeroport):
 G = generation_graphe(DatAvion, DatVehicule, aeroport)
 options = {
     'node_color': 'red',
-    'node_size': 10,
+    'node_size': 200,
     'edge_color': 'tab:gray',
-    'with_labels': False
+    'with_labels': True,
+    'width':2,
 }
 plt.figure(figsize=(10, 10))
 pos = networkx.spring_layout(G, k=0.1)
